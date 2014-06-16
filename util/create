@@ -9,14 +9,16 @@ module Rosalind
 
     def process
       name = question.strip.downcase.gsub(' ', '_')
-      path = File.join('problems', name, 'solution.rb')
-      create_file(path) do
+      base_path = File.join('problems', name)
+      create_file(File.join(base_path, 'solution.rb')) do
         <<-EOF
 # Problem: #{question}
 
 dataset = File.read('dataset.txt')
 EOF
       end
+
+      create_file(File.join(base_path, 'dataset.txt'))
     end
   end
 end
