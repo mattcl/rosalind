@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require 'thor'
+
+module Rosalind
+  class Create < Thor::Group
+    include Thor::Actions
+
+    argument :question, :type => :string, :desc => 'The title of the question'
+
+    def process
+      name = question.strip.downcase.gsub(' ', '_')
+      path = File.join('problems', name, 'solution.rb')
+      create_file(path) do
+        <<-EOF
+# Problem: #{question}
+
+dataset = File.read('dataset.txt')
+EOF
+      end
+    end
+  end
+end
+
+Rosalind::Create.start
