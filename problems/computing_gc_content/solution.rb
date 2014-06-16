@@ -1,18 +1,7 @@
 # Problem: Computing GC Content
+require_relative '../../util/fasta'
 
-dataset = File.readlines('dataset.txt')
-
-data = Hash.new { |h, k| h[k] = '' }
-
-cur = nil
-dataset.each do |line|
-  res = line.match(/^>(.*)/)
-  if res
-    cur = res[1]
-  elsif cur
-    data[cur] += line.strip
-  end
-end
+data = Rosalind::Fasta.import('dataset.txt')
 
 max = 0
 max_key = nil
