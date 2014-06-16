@@ -1,0 +1,9 @@
+# Problem: <%= question %>
+
+<% if options[:fasta] -%>
+require_relative '../../util/fasta'
+
+data = Rosalind::Fasta.import('dataset.txt')
+<% else -%>
+ dataset = File.read('dataset.txt') 
+<% end -%>

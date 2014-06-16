@@ -5,22 +5,24 @@ module Rosalind
   class Create < Thor::Group
     include Thor::Actions
 
-    argument :question, :type => :string, :desc => 'The title of the question'
+    def self.source_root
+      File.dirname(__FILE__)
+    end
+
+    argument :question, type: :string, desc: 'The title of the question'
+    class_option :fasta, aliases: '-f', type: :boolean, default: false, desc: 'include fasta helper'
 
     def process
-      name = question.strip.downcase.gsub(' ', '_')
-      base_path = File.join('problems', name)
-      create_file(File.join(base_path, 'solution.rb')) do
-        <<-EOF
-# Problem: #{question}
+      @name = question.strip.downcase.gsub(' ', '_')
+      base_path = File.join('problems', @name)
 
-dataset = File.read('dataset.txt')
-EOF
-      end
+      template('templates/solution.rb.erb', File.join(base_path, 'solution.rb'))
 
       create_file(File.join(base_path, 'dataset.txt'))
     end
   end
+
+
 end
 
 Rosalind::Create.start
