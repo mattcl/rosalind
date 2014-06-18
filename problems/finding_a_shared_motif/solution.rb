@@ -1,17 +1,24 @@
 # Problem: Finding a Shared Motif
-require 'set'
 require_relative '../../util/fasta'
+require_relative '../../util/suffix_tree'
 
 data = Rosalind::Fasta.import('dataset.txt')
 
-sequences = data.values.sort_by { |s| s.length }
+tree = Rosalind::GeneralizedSuffixTree.new(data.values)
 
-# find all common sub sequences for the shortest two sequences
-common_seq = Set.new
+@common_substrings = Set.new
 
-s1 = sequences.shift
-s2 = sequences.shift
+def search(bound, node, cur_str)
+  return if node.ids.size < bound
 
+  @common_substrings.add(cur_str)
 
+  node.children.each do |char, child|
+    search(bound, child, cur_str + char)
+  end
+end
 
-puts sequences.inspect
+cur_str = ''
+search(data.size, tree.root, cur_str)
+
+puts @common_substrings.to_a.sort_by(&:length).last
