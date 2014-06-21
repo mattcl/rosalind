@@ -1,31 +1,21 @@
 # Problem: Independent Alleles
 require_relative '../../util/punnet'
-require_relative '../../util/tree'
 
 k, n = File.read('dataset.txt').strip.split(' ').map(&:to_i)
 
-class PNode < Rosalind::UNode
-  def edge_label(child)
-    child.data[:prob]
-  end
+p = Rosalind::Punnet.nhybrid('AaBb', 'AaBb')['AaBb']
+
+@fac_map = Hash.new { |h, i| h[i] = (1..i).inject(:*) }
+
+def comb(num, c)
+  return 1 if c >= num
+  @fac_map[num] / (@fac_map[c] * @fac_map[num - c])
 end
 
-@p_map = Hash.new { |h, g| h[g] = Rosalind::Punnet.nhybrid(g, 'AaBb') }
+total_children = 2**k
 
-def build(node, depth)
-  # breed
+desired_p = (n..(total_children)).to_a.reduce(0) do |sum, i|
+  sum + comb(total_children, i) * (p ** i) * (1 - p) ** (total_children - i)
 end
 
-# given a staring parent g, what is the probability p that the parent has at
-# least n of k children with desired genotype d?
-g = 'AaBb'
-d = 'AaBb'
-
-tree = PNode.new("0:#{g}", {genotype: g, prob: 1})
-
-p_map[g].each do |genotype, p|
-  child = PNode.new("1:#{genotype}", {genotype: genotype, prob: p})
-  tree.insert(child)
-end
-
-tree.graph.output(png:'testing.png')
+puts desired_p
