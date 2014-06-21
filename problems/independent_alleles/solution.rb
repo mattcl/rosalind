@@ -1,5 +1,6 @@
 # Problem: Independent Alleles
 require_relative '../../util/punnet'
+require_relative '../../util/tree'
 
 k, n = File.read('dataset.txt').strip.split(' ').map(&:to_i)
 
@@ -23,3 +24,12 @@ puts p_map[g][desired]
 # least n of k children with desired genotype d?
 g = 'AaBb'
 d = 'AaBb'
+
+tree = Rosalind::UNode.new("0:#{g}", {prob: 1})
+
+p_map[g].each do |genotype, p|
+  child = Rosalind::UNode.new("1:#{genotype}", {prob: p})
+  tree.insert(child)
+end
+
+tree.graph.output(png:'testing.png')
