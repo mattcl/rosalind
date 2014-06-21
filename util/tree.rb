@@ -26,13 +26,17 @@ module Rosalind
       g
     end
 
+    def edge_label(child)
+      ''
+    end
+
     protected
 
     def graph_recursive(g)
       graph_node = g.add_node(label)
       children.each do |_, child|
         child_graph_node = child.graph_recursive(g)
-        g.add_edge(graph_node, child_graph_node)
+        g.add_edge(graph_node, child_graph_node, {label: edge_label(child)})
       end
       graph_node
     end
