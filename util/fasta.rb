@@ -1,5 +1,9 @@
+require 'rest_client'
+
 module Rosalind
   module Fasta
+    UNIPROT_URL = 'http://www.uniprot.org/uniprot/'
+
     def self.import(filename)
       data = Hash.new { |h, k| h[k] = '' }
 
@@ -14,6 +18,12 @@ module Rosalind
       end
 
       data
+    end
+
+    def self.fetch_from_uniprot(id)
+      data = RestClient.get("#{UNIPROT_URL}#{id}.fasta").split("\n")
+      data.shift
+      data.join
     end
   end
 end
