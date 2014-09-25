@@ -21,7 +21,7 @@ module Rosalind
         @mrna_lookup = Hash.new { |h, k| h[k] = [] }
         MRNA_TO_AMINO_ACID.each { |k, v| @mrna_lookup[v] << k }
       end
-      @mrna_lookup
+      @mrna_lookup[amino_acid]
     end
 
     def self.amino_acid(codon)
