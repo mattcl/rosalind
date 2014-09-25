@@ -14,8 +14,9 @@ module Rosalind
       'UGC' => 'C', 'CGC' => 'R', 'AGC' => 'S', 'GGC' => 'G', 'CGA' => 'R',
       'AGA' => 'R', 'GGA' => 'G', 'UGG' => 'W', 'CGG' => 'R', 'AGG' => 'R',
       'GGG' => 'G', 'UGA' => 'Stop', 'UAA' => 'Stop', 'UAG' => 'Stop',
-      'AUG' => 'Start'
     }
+
+    START_CODON = 'AUG'
 
     def self.mRNA(amino_acid)
       unless @mrna_lookup
@@ -27,6 +28,17 @@ module Rosalind
 
     def self.amino_acid(codon)
       MRNA_TO_AMINO_ACID[codon]
+    end
+
+    def self.from_rna(rna)
+      protein = ''
+      rna.chars.each_slice(3).each do |codon|
+        val = self.amino_acid(codon.join)
+        break if val == 'Stop'
+        protein += val
+      end
+
+      protein
     end
   end
 end
