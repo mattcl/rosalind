@@ -1,5 +1,5 @@
 # Problem: Inferring mRNA from Protein
-require_relative '../../util/protein'
+require_relative '../../util/rosalind'
 
 dataset = File.read('dataset.txt').strip
 

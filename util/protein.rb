@@ -14,6 +14,7 @@ module Rosalind
       'UGC' => 'C', 'CGC' => 'R', 'AGC' => 'S', 'GGC' => 'G', 'CGA' => 'R',
       'AGA' => 'R', 'GGA' => 'G', 'UGG' => 'W', 'CGG' => 'R', 'AGG' => 'R',
       'GGG' => 'G', 'UGA' => 'Stop', 'UAA' => 'Stop', 'UAG' => 'Stop',
+      'AUG' => 'Start'
     }
 
     def self.mRNA(amino_acid)

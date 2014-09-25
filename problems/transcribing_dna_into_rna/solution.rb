@@ -1,5 +1,6 @@
 # Problem: Transcribing DNA into RNA
+require_relative '../../util/rosalind'
 
 dataset = File.read('dataset.txt')
 
-puts dataset.gsub('T', 'U')
+puts Rosalind::DNA.to_rna(dataset)

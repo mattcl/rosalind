@@ -1,6 +1,6 @@
 # Problem: Finding a Protein Motif
 
-require_relative '../../util/fasta'
+require_relative '../../util/rosalind'
 
 search = /^N[^P][ST][^P]/
 

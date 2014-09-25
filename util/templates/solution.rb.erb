@@ -1,9 +1,9 @@
 # Problem: <%= question %>
 
-<% if options[:fasta] -%>
-require_relative '../../util/fasta'
+require_relative '../../util/rosalind'
 
+<% if options[:fasta] -%>
 data = Rosalind::Fasta.import('dataset.txt')
 <% else -%>
- dataset = File.read('dataset.txt') 
+dataset = File.read('dataset.txt')
 <% end -%>

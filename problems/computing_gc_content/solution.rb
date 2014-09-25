@@ -1,5 +1,5 @@
 # Problem: Computing GC Content
-require_relative '../../util/fasta'
+require_relative '../../util/rosalind'
 
 data = Rosalind::Fasta.import('dataset.txt')
 
