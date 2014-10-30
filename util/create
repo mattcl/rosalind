@@ -9,8 +9,10 @@ module Rosalind
       File.dirname(__FILE__)
     end
 
+    desc 'bio QUESTION [opts]', 'create a new bioinformatics question'
     option :fasta, aliases: '-f', type: :boolean, default: false, desc: 'include fasta helper'
     def bio(question)
+      @question = question
       @name = question.strip.downcase.gsub(' ', '_')
       base_path = File.join('problems', 'bioinformatics', @name)
 
@@ -19,7 +21,9 @@ module Rosalind
       create_file(File.join(base_path, 'dataset.txt'))
     end
 
+    desc 'bio QUESTION [opts]', 'create a new algorithm question'
     def algo(question)
+      @question = question
       @name = question.strip.downcase.gsub(' ', '_')
       base_path = File.join('problems', 'algorithms', @name)
 
