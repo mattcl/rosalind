@@ -1,5 +1,5 @@
 # Problem: Independent Alleles
-require_relative '../../util/rosalind'
+require_relative '../../../util/rosalind'
 
 k, n = File.read('dataset.txt').strip.split(' ').map(&:to_i)
 

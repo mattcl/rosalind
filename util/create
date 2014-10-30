@@ -2,21 +2,28 @@
 require 'thor'
 
 module Rosalind
-  class Create < Thor::Group
+  class Create < Thor
     include Thor::Actions
 
     def self.source_root
       File.dirname(__FILE__)
     end
 
-    argument :question, type: :string, desc: 'The title of the question'
-    class_option :fasta, aliases: '-f', type: :boolean, default: false, desc: 'include fasta helper'
-
-    def process
+    option :fasta, aliases: '-f', type: :boolean, default: false, desc: 'include fasta helper'
+    def bio(question)
       @name = question.strip.downcase.gsub(' ', '_')
-      base_path = File.join('problems', @name)
+      base_path = File.join('problems', 'bioinformatics', @name)
 
-      template('templates/solution.rb.erb', File.join(base_path, 'solution.rb'))
+      template('templates/bioinformatics/solution.rb.erb', File.join(base_path, 'solution.rb'))
+
+      create_file(File.join(base_path, 'dataset.txt'))
+    end
+
+    def algo(question)
+      @name = question.strip.downcase.gsub(' ', '_')
+      base_path = File.join('problems', 'algorithms', @name)
+
+      template('templates/algorithms/solution.rb.erb', File.join(base_path, 'solution.rb'))
 
       create_file(File.join(base_path, 'dataset.txt'))
     end

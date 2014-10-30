@@ -1,6 +1,6 @@
 # Problem: Open Reading Frames
 
-require_relative '../../util/rosalind'
+require_relative '../../../util/rosalind'
 
 data = Rosalind::Fasta.import('dataset.txt').values.first
 

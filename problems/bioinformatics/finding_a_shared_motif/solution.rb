@@ -1,6 +1,6 @@
 # Problem: Finding a Shared Motif
-require_relative '../../util/rosalind'
-require_relative '../../util/suffix_tree'
+require_relative '../../../util/rosalind'
+require_relative '../../../util/suffix_tree'
 
 data = Rosalind::Fasta.import('dataset.txt')
 

@@ -1,5 +1,5 @@
 # Problem: Translating RNA into Protein
-require_relative '../../util/rosalind'
+require_relative '../../../util/rosalind'
 
 dataset = File.read('dataset.txt').strip
 
